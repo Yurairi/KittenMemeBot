@@ -55,7 +55,7 @@ def split_text_by_words(input_string):
 @router.message(Command('meme'))
 async def create_and_send_meme(message: Message) -> None:
     text_args: str = message.text[5:]
-    text_input: str = text_args if len(text_args) > 0 else "Прикрепи текст дебил"
+    text_input: str = text_args if len(text_args) > 0 else "Прикрепи текст"
 
     text0, text1 = split_text_by_words(text_input)
 
