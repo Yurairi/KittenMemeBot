@@ -1,10 +1,8 @@
-import requests
 from config import *
 import asyncio
-from typing import List, Tuple, Any
+from typing import Tuple
 import random
 import io
-import os
 from PIL import Image, ImageDraw, ImageFont
 from aiohttp import ClientSession, ClientError
 from aiogram import Dispatcher
