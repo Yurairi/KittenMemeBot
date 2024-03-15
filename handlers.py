@@ -14,11 +14,13 @@ bot = Bot(token=BOT_TOKEN)
 
 @router.message(CommandStart())
 async def cmd_start(message: Message):
-    await message.answer_sticker(sticker="CAACAgIAAxkBAAMZZeEEBA9hgV8nuK-zIT1xbwGsSgoAAs0rAALEkbBIcYhgxom4IKM0BA")
+    await message.answer_sticker(
+        sticker="CAACAgIAAxkBAAMZZeEEBA9hgV8nuK-zIT1xbwGsSgoAAs0rAALEkbBIcYhgxom4IKM0BA"
+    )
     await message.answer(text=START_TEXT)
 
 
-@router.message(Command('get_cat'))
+@router.message(Command("get_cat"))
 async def send_cat_photos(message: types.Message):
     image_urls: Any = await get_cat_images(count=10)
     for url in image_urls:
@@ -46,13 +48,13 @@ def split_text_by_words(input_string):
         first_part = words[0]
         second_part = words[1]
     else:
-        first_part = ' '.join(words[:split_index + 1])
-        second_part = ' '.join(words[split_index + 1:])
+        first_part = " ".join(words[: split_index + 1])
+        second_part = " ".join(words[split_index + 1 :])
 
     return first_part, second_part
 
 
-@router.message(Command('meme'))
+@router.message(Command("meme"))
 async def create_and_send_meme(message: Message) -> None:
     text_args: str = message.text[5:]
     text_input: str = text_args if len(text_args) > 0 else "Прикрепи текст"
@@ -62,10 +64,10 @@ async def create_and_send_meme(message: Message) -> None:
     image_url: str = await get_cat_images(1)
 
     name: str = await create_meme(image_url[0], text0, text1)
-    photo: FSInputFile = FSInputFile(name, 'rb')
+    photo: FSInputFile = FSInputFile(name, "rb")
 
     if os.path.getsize(name) != 0:
-        await message.answer(text='Твое изображение готово')
+        await message.answer(text="Твое изображение готово")
         await bot.send_photo(message.chat.id, photo)
         os.remove(name)
     else:
