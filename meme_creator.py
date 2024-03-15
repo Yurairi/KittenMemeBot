@@ -1,13 +1,11 @@
-from config import *
-import asyncio
-from typing import Tuple
-import random
-import io
+from config import API_URL
+import requests
 from PIL import Image, ImageDraw, ImageFont
 from aiohttp import ClientSession, ClientError
-from aiogram import Dispatcher
-from handlers import *
-
+import os
+import io
+import random
+from typing import Tuple, Any, List
 
 async def get_cat_images(count: int = 10) -> Any:
     params: dict = {
@@ -93,15 +91,3 @@ async def download_image(url: str) -> bytes:
         print(f"Error downloading image: {e}")
         return None
 
-
-async def main():
-    dp = Dispatcher()
-    dp.include_router(router)
-    await dp.start_polling(bot)
-
-
-if __name__ == '__main__':
-    try:
-        asyncio.run(main())
-    except KeyboardInterrupt:
-        print('Error')
